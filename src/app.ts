@@ -1,6 +1,8 @@
 import express from 'express';
-
 import multer from 'multer';
+import path from 'path';
+import { handlerfile } from './handlerFile';
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads')
@@ -12,19 +14,20 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 const app = express();
-const port = 8000
+const port = 8000;
 
 app.get('/', (req, res) => {
-  res.send('Hello World !')
+    res.sendFile(path.join(__dirname, '../public/index.html'));    
 })
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
-    res.json(req.file)
-    // res.send('Upload file ok !!!')
+
+app.post('/api/upload', upload.single('file'), async (req, res) => {
+    res.json(handlerfile(req.file?.filename));    
   })
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`http://localhost:${port}`)
 })
+
 
