@@ -20,14 +20,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));    
 })
 
-
 app.post('/api/upload', upload.single('file'), async (req, res) => {
     res.json(handlerfile(req.file?.filename));    
   })
 
-
 app.listen(port, () => {
   console.log(`http://localhost:${port}`)
 })
-
-
