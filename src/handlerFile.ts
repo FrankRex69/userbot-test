@@ -1,15 +1,3 @@
-// import fs from 'fs';
-
-// export const handlerfile = () => {
-//     fs.readFileSync('/uploads/Linea_per_colloquio.txt', 'utf-8', function(err, result){ 
-//         if(err){ 
-//            return 'err';
-//         }
-//         return 'result';       
-//     });    
-// };
-
-
 import fs from 'node:fs';
 import path from 'node:path';
 import { setDefaultHighWaterMark } from 'node:stream';
@@ -34,11 +22,9 @@ export const handlerfile = (file: string | undefined) => {
 
         // Sort the array
         dataArray.sort();
-        console.log(dataArray);
 
         // Extract single words
         const singleWords = new Set(dataArray);
-        console.log(singleWords);
 
         // Words with number occurance
         singleWords.forEach((word) => {
@@ -46,12 +32,10 @@ export const handlerfile = (file: string | undefined) => {
             const end = dataArray.lastIndexOf(word);
             const count = end - start + 1;
             if(count >= 2){
-                const response = word + ':' + count;
-                console.log(response);            
+                const response = word + ':' + count;                     
                 responseArr.push(response);  
             }                      
         });
-        console.log(responseArr);
         return responseArr;
     }
 
