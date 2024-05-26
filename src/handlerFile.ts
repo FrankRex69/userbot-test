@@ -31,7 +31,7 @@ export const handlerfile = (file: string | undefined) => {
             const start = dataArray.indexOf(word);
             const end = dataArray.lastIndexOf(word);
             const count = end - start + 1;
-            if(count >= 2){
+            if(count > 10){
                 const response = word + ':' + count;                     
                 responseArr.push(response);  
             }                      
@@ -40,7 +40,7 @@ export const handlerfile = (file: string | undefined) => {
     }
 
     try {
-        const data = fs.readFileSync(path.join(__dirname, '../uploads/'+file), 'utf8');        
+        const data = fs.readFileSync(path.join(__dirname, '../uploads/'+file), 'binary');        
         const dataResp = {
             numberTotWords : wordsLenght(data),
             numberTotChar : data.length,
